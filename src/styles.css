@@ -1,0 +1,346 @@
+/* src/styles.css */
+
+:root {
+  --bg: #14161a;
+  --surface: #1c1f26;
+  --surface-raised: #22262e;
+  --border: #2a2e37;
+  --text: #e9eaec;
+  --text-dim: #8b909c;
+  --accent: #5b8def;
+  --accent-dim: #3a5fa8;
+  --positive: #4caf82;
+  --warning: #e0a72e;
+  --danger: #e1615b;
+
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Subtle animated gradient wash, CSS-only, GPU accelerated. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: -10%;
+  z-index: -1;
+  background: radial-gradient(
+      circle at 15% 20%,
+      rgba(91, 141, 239, 0.10),
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 85% 75%,
+      rgba(91, 141, 239, 0.07),
+      transparent 40%
+    ),
+    var(--bg);
+  background-size: 140% 140%;
+  animation: driftGradient 22s ease-in-out infinite alternate;
+  will-change: background-position;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before {
+    animation: none;
+  }
+}
+
+@keyframes driftGradient {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 60%;
+  }
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  margin: 0;
+}
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+}
+
+input, select, textarea {
+  font-family: var(--font-body);
+  color: var(--text);
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 14px;
+}
+
+input:focus, select:focus, textarea:focus, button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+/* ---- Layout ---- */
+
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  border-right: 1px solid var(--border);
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sidebar-logo {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  padding: 0 8px;
+}
+
+.nav-link {
+  display: block;
+  padding: 9px 10px;
+  border-radius: 6px;
+  color: var(--text-dim);
+  text-decoration: none;
+  background: none;
+  border: none;
+  text-align: left;
+  width: 100%;
+  font-size: 14px;
+}
+
+.nav-link:hover {
+  color: var(--text);
+  background: var(--surface);
+}
+
+.nav-link.active {
+  color: var(--text);
+  background: var(--surface-raised);
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.sidebar-email {
+  font-size: 12px;
+  color: var(--text-dim);
+  padding: 0 8px 8px;
+  overflow-wrap: anywhere;
+}
+
+.main {
+  flex: 1;
+  padding: 32px 40px;
+  max-width: 980px;
+}
+
+/* ---- Cards / surfaces ---- */
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+}
+
+.card-button {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+  text-align: left;
+  color: var(--text);
+  transition: border-color 0.15s ease;
+}
+
+.card-button:hover {
+  border-color: var(--accent-dim);
+}
+
+.batch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+
+/* ---- Buttons ---- */
+
+.btn {
+  border-radius: 6px;
+  padding: 9px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid transparent;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--accent-dim);
+}
+
+.btn-secondary {
+  background: var(--surface-raised);
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent-dim);
+}
+
+.btn-danger {
+  background: transparent;
+  color: var(--danger);
+  border-color: transparent;
+}
+
+.btn-danger:hover {
+  background: rgba(225, 97, 91, 0.1);
+}
+
+.btn-small {
+  padding: 5px 10px;
+  font-size: 12.5px;
+}
+
+/* ---- Follow-up banner ---- */
+
+.followups-banner {
+  background: rgba(224, 167, 46, 0.1);
+  border: 1px solid rgba(224, 167, 46, 0.3);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  color: var(--warning);
+  font-size: 13.5px;
+}
+
+/* ---- Lead rows ---- */
+
+.lead-row {
+  display: grid;
+  grid-template-columns: 1fr 100px 140px 90px 90px 32px 80px;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  font-size: 13.5px;
+}
+
+.lead-row:last-child {
+  border-bottom: none;
+}
+
+.lead-name {
+  font-weight: 500;
+}
+
+.lead-meta {
+  color: var(--text-dim);
+  font-size: 12px;
+}
+
+.type-badge {
+  display: inline-block;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 2px 9px;
+  font-size: 11.5px;
+  color: var(--text-dim);
+}
+
+.priority-star {
+  background: none;
+  border: none;
+  font-size: 16px;
+  color: var(--border);
+  padding: 0;
+}
+
+.priority-star.active {
+  color: var(--warning);
+}
+
+.duplicate-flag {
+  color: var(--warning);
+  font-size: 11.5px;
+}
+
+.error-text {
+  color: var(--danger);
+  font-size: 13px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-dim);
+}
+
+.login-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-card {
+  width: 320px;
+}
+
+.login-card h1 {
+  margin-bottom: 4px;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.field-group label {
+  font-size: 12.5px;
+  color: var(--text-dim);
+}
