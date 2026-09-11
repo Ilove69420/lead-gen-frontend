@@ -2,7 +2,7 @@
 import { auth } from "./firebase";
 
 // Set this once you've deployed the backend to Vercel.
-export const BACKEND_URL = "https://YOUR-VERCEL-PROJECT.vercel.app";
+export const BACKEND_URL = "https://lead-gen-backend-pi.vercel.app";
 
 async function call(path, body, method = "POST") {
   const user = auth.currentUser;
